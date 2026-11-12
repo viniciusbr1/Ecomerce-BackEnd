@@ -1,0 +1,3 @@
+DB_URL=jdbc:postgresql://HOST/neondb?sslmode=require&channelBinding=require
+PGUSER=professor_teste
+PGPASSWORD=npg_QsGt9hM8XvYD
