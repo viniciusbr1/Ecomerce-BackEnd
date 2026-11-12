@@ -1,0 +1,365 @@
+<div class="container py-5">
+
+  <div class="row justify-content-center">
+
+    <div class="col-12 col-md-10 col-lg-8">
+
+      <div class="card card-matrix shadow">
+
+        <div class="card-body p-4">
+
+          <div class="text-center mb-4">
+
+            <h1 class="titulo-matrix">
+              CADASTRO
+            </h1>
+
+            <p class="subtitulo-matrix">
+              Crie sua conta na MATRIX
+            </p>
+
+          </div>
+
+
+          <form
+            #formCadastro="ngForm"
+            (ngSubmit)="cadastrar(formCadastro)">
+
+
+            <!-- NOME -->
+
+            <div class="mb-3">
+
+              <label class="form-label">
+                Nome completo
+              </label>
+
+              <input
+                type="text"
+                class="form-control"
+                name="nome"
+                [(ngModel)]="cliente.nome"
+                required
+                minlength="3"
+                pattern="[A-Za-zÀ-ÿ ]+"
+                #nome="ngModel"
+                placeholder="Digite seu nome">
+
+              <div
+                class="text-danger mt-1"
+                *ngIf="nome.invalid && nome.touched">
+
+                Digite um nome válido.
+
+              </div>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="mb-3">
+
+              <label class="form-label">
+                E-mail
+              </label>
+
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                [(ngModel)]="cliente.email"
+                required
+                email
+                #email="ngModel"
+                placeholder="exemplo@email.com">
+
+              <div
+                class="text-danger mt-1"
+                *ngIf="email.invalid && email.touched">
+
+                Digite um e-mail válido.
+
+              </div>
+
+            </div>
+
+
+            <!-- TELEFONE -->
+
+            <div class="mb-3">
+
+              <label class="form-label">
+                Telefone
+              </label>
+
+              <input
+                type="text"
+                class="form-control"
+                name="telefone"
+                [(ngModel)]="cliente.telefone"
+                (input)="formatarTelefone()"
+                required
+                maxlength="16"
+                pattern="\([0-9]{3}\) [0-9]{4}-[0-9]{4}"
+                #telefone="ngModel"
+                placeholder="(011) 9999-9999">
+
+              <div
+                class="text-danger mt-1"
+                *ngIf="telefone.invalid && telefone.touched">
+
+                Digite um telefone válido.
+
+              </div>
+
+            </div>
+
+
+            <!-- CPF -->
+
+            <div class="mb-3">
+
+              <label class="form-label">
+                CPF
+              </label>
+
+              <input
+                type="text"
+                class="form-control"
+                name="cpf"
+                [(ngModel)]="cliente.cpf"
+                (input)="formatarCpf()"
+                required
+                maxlength="14"
+                pattern="[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}"
+                #cpf="ngModel"
+                placeholder="000.000.000-00">
+
+              <div
+                class="text-danger mt-1"
+                *ngIf="cpf.invalid && cpf.touched">
+
+                Digite um CPF válido.
+
+              </div>
+
+            </div>
+
+
+            <!-- CEP -->
+
+            <div class="mb-3">
+
+              <label class="form-label">
+                CEP
+              </label>
+
+              <input
+                type="text"
+                class="form-control"
+                name="cep"
+                [(ngModel)]="cliente.cep"
+                (input)="formatarCep()"
+                required
+                maxlength="9"
+                pattern="[0-9]{5}-[0-9]{3}"
+                #cep="ngModel"
+                placeholder="00000-000">
+
+              <div
+                class="text-danger mt-1"
+                *ngIf="cep.invalid && cep.touched">
+
+                Digite um CEP válido.
+
+              </div>
+
+            </div>
+
+
+            <!-- ENDEREÇO -->
+
+            <div class="mb-3">
+
+              <label class="form-label">
+                Endereço
+              </label>
+
+              <input
+                type="text"
+                class="form-control"
+                name="endereco"
+                [(ngModel)]="cliente.endereco"
+                required
+                #endereco="ngModel"
+                placeholder="Rua, Avenida...">
+
+              <div
+                class="text-danger mt-1"
+                *ngIf="endereco.invalid && endereco.touched">
+
+                Digite o endereço.
+
+              </div>
+
+            </div>
+
+
+            <div class="row">
+
+
+              <!-- NÚMERO -->
+
+              <div class="col-12 col-md-4 mb-3">
+
+                <label class="form-label">
+                  Número
+                </label>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  name="numero"
+                  [(ngModel)]="cliente.numeroEndereco"
+                  required
+                  pattern="[0-9]+"
+                  #numeroEndereco="ngModel"
+                  placeholder="123">
+
+                <div
+                  class="text-danger mt-1"
+                  *ngIf="numeroEndereco.invalid && numeroEndereco.touched">
+
+                  Digite apenas números.
+
+                </div>
+
+              </div>
+
+
+              <!-- CIDADE -->
+
+              <div class="col-12 col-md-5 mb-3">
+
+                <label class="form-label">
+                  Cidade
+                </label>
+
+                <input
+                  type="text"
+                  class="form-control"
+                  name="cidade"
+                  [(ngModel)]="cliente.cidade"
+                  required
+                  pattern="[A-Za-zÀ-ÿ ]+"
+                  #cidade="ngModel"
+                  placeholder="Sua cidade">
+
+                <div
+                  class="text-danger mt-1"
+                  *ngIf="cidade.invalid && cidade.touched">
+
+                  Digite uma cidade válida.
+
+                </div>
+
+              </div>
+
+
+              <!-- ESTADO -->
+
+              <div class="col-12 col-md-3 mb-3">
+
+                <label class="form-label">
+                  Estado
+                </label>
+
+                <input
+                  type="text"
+                  class="form-control text-uppercase"
+                  name="estado"
+                  [(ngModel)]="cliente.estado"
+                  required
+                  maxlength="2"
+                  minlength="2"
+                  pattern="[A-Za-z]{2}"
+                  #estado="ngModel"
+                  placeholder="SP">
+
+                <div
+                  class="text-danger mt-1"
+                  *ngIf="estado.invalid && estado.touched">
+
+                  Informe a UF.
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- SENHA -->
+
+            <div class="mb-4">
+
+              <label class="form-label">
+                Senha
+              </label>
+
+              <input
+                type="password"
+                class="form-control"
+                name="senha"
+                [(ngModel)]="cliente.senha"
+                required
+                minlength="6"
+                #senha="ngModel"
+                placeholder="Mínimo 6 caracteres">
+
+              <div
+                class="text-danger mt-1"
+                *ngIf="senha.invalid && senha.touched">
+
+                A senha deve ter pelo menos 6 caracteres.
+
+              </div>
+
+            </div>
+
+
+            <!-- BOTÃO -->
+
+            <button
+              type="submit"
+              class="btn btn-matrix w-100"
+              [disabled]="formCadastro.invalid || cadastrando">
+
+              {{ cadastrando ? 'Cadastrando...' : 'Criar conta' }}
+
+            </button>
+
+
+            <!-- MENSAGEM -->
+
+            <div
+              class="alert text-center mt-4"
+              [ngClass]="erroCadastro ? 'alert-danger' : 'alert-success'"
+              *ngIf="mensagem !== ''">
+
+              {{ mensagem }}
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,112 @@
+<header>
+
+   <div class="logo">
+     <a href="/">
+        MINHA LOJA
+     </a>
+   </div>
+
+    <div class="busca">
+        <input type="text"
+        placeholder="Pesquisar produtos...">
+    
+        <button>
+            <i class="bi bi-search"></i>
+        </button>
+    </div>
+
+     <div class="acoes">
+
+        <button class="carrinho" (click)="abrirCarrinho()">
+            <i class="bi bi-cart3"></i>
+        </button>
+
+        <button class="conta" (click)="abrirPerfil()">
+            <i class="bi bi-person"></i>
+        </button>
+
+        
+    </div>
+
+
+</header>
+
+@if (carrinhoAberto) {
+    <div class="carrinho-painel">
+
+        <div class="carrinho-header">
+            <h2>Meu Carrinho</h2>
+
+            <button (click)="fecharCarrinho()">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <p>Seu carrinho está vazio.</p>
+
+    </div>
+
+
+}
+
+@if (perfilAberto) {
+
+    <div class="perfil-overlay">
+
+        <div class="perfil-modal">
+
+            <button class="fechar-perfil" (click)="fecharPerfil()">
+                <i class="bi bi-x-lg"></i>
+            </button>
+
+            <div class="login">
+
+                <h2>Entrar</h2>
+
+                <p>Acesse sua conta</p>
+
+                <label for="email">E-mail</label>
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="Digite seu e-mail"
+                >
+
+                <label for="senha">Senha</label>
+                <input
+                    id="senha"
+                    type="password"
+                    placeholder="Digite sua senha"
+                >
+
+                <button class="botao-login">
+                    Entrar
+                </button>
+
+            </div>
+
+            <div class="cadastro">
+
+                <h2>Ainda não possui uma conta?</h2>
+
+                <p>
+                    Crie sua conta para aproveitar
+                    todos os recursos da nossa loja.
+                </p>
+
+                <button
+                    class="botao-cadastro"
+                    routerLink="/cadastro"
+                >
+                    Criar conta
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+}
+
+

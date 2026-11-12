@@ -1,0 +1,401 @@
+<div class="container py-5">
+
+  <div class="text-center mb-4">
+
+    <h1 class="titulo-matrix">
+      PRODUTOS
+    </h1>
+
+    <p class="subtitulo-matrix">
+      Explore os produtos disponíveis na MATRIX
+    </p>
+
+  </div>
+
+
+  <!-- MENSAGEM FLUTUANTE -->
+
+  <div
+    class="mensagem-flutuante"
+    *ngIf="mensagemCarrinho !== ''">
+
+    {{ mensagemCarrinho }}
+
+  </div>
+
+
+  <!-- PESQUISA -->
+
+  <div class="row justify-content-center mb-3">
+
+    <div class="col-12 col-md-8 col-lg-6">
+
+      <input
+        type="text"
+        class="form-control pesquisa-matrix"
+        [(ngModel)]="pesquisa"
+        placeholder="Pesquisar produto...">
+
+    </div>
+
+  </div>
+
+
+  <!-- MENU DE CATEGORIAS -->
+
+  <div class="row justify-content-center mb-5">
+
+    <div class="col-12 col-md-6 col-lg-4">
+
+      <label class="form-label">
+        Escolha uma categoria
+      </label>
+
+      <select
+        class="form-select"
+        [(ngModel)]="categoriaSelecionada">
+
+        <option value="Todos">
+          Todos os produtos
+        </option>
+
+        <option value="Processador">
+          Processadores
+        </option>
+
+        <option value="Memória">
+          Memórias
+        </option>
+
+        <option value="Gabinete">
+          Gabinetes
+        </option>
+
+        <option value="Cooler">
+          Coolers
+        </option>
+
+        <option value="Placa de Vídeo">
+          Placas de Vídeo
+        </option>
+
+        <option value="Fonte">
+          Fontes
+        </option>
+
+        <option value="SSD">
+          SSDs
+        </option>
+
+        <option value="Monitor">
+          Monitores
+        </option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+
+  <!-- PRODUTOS -->
+
+  <div class="row g-4">
+
+    <div
+      class="col-12 col-sm-6 col-lg-3"
+      *ngFor="let produto of produtosFiltrados">
+
+      <div class="card h-100 shadow-sm card-matrix">
+
+        <img
+          [src]="produto.imagem"
+          class="card-img-top"
+          [alt]="produto.nome">
+
+
+        <div class="card-body">
+
+          <p class="categoria-card">
+            {{ produto.categoria }}
+          </p>
+
+          <h5 class="card-title">
+            {{ produto.nome }}
+          </h5>
+
+          <p class="card-text">
+            {{ produto.descricao }}
+          </p>
+
+          <h4 class="preco-matrix">
+           {{ formatarPreco(produto.preco) }}
+          </h4>
+
+        </div>
+
+
+        <div class="card-footer border-0">
+
+          <div class="d-grid gap-2">
+
+            <button
+              class="btn btn-outline-success"
+              (click)="abrirDetalhes(produto)">
+
+              Detalhes
+
+            </button>
+
+            <button
+              class="btn btn-matrix"
+              (click)="comprar(produto)">
+
+              Comprar
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- JANELA DE DETALHES -->
+
+<div
+  class="modal d-block"
+  tabindex="-1"
+  *ngIf="produtoSelecionado">
+
+  <div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content modal-matrix">
+
+      <div class="modal-header">
+
+        <h5 class="modal-title">
+          {{ produtoSelecionado.nome }}
+        </h5>
+
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          (click)="fecharDetalhes()">
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <img
+          [src]="produtoSelecionado.imagem"
+          [alt]="produtoSelecionado.nome"
+          class="img-fluid imagem-detalhe mb-3">
+
+
+        <p class="categoria-produto">
+          {{ produtoSelecionado.categoria }}
+        </p>
+
+
+        <p>
+          {{ produtoSelecionado.descricao }}
+        </p>
+
+
+        <h3 class="preco-matrix">
+          {{ formatarPreco(produtoSelecionado.preco) }}
+        </h3>
+
+
+        <hr>
+
+
+        <h5 class="titulo-detalhes">
+          Especificações
+        </h5>
+
+
+        <ul class="lista-detalhes">
+
+          <li
+            *ngFor="let detalhe of produtoSelecionado.detalhes">
+
+            {{ detalhe }}
+
+          </li>
+
+        </ul>
+
+
+        <hr>
+
+
+        <p>
+          <strong>Disponibilidade:</strong>
+
+          <span class="texto-verde">
+            Em estoque
+          </span>
+        </p>
+
+
+        <p>
+          <strong>Pagamento:</strong>
+          PIX, cartão ou boleto
+        </p>
+
+
+        <p>
+          <strong>Entrega:</strong>
+          Consulte o frete no carrinho
+        </p>
+
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="fecharDetalhes()">
+
+          Fechar
+
+        </button>
+
+
+        <button
+          type="button"
+          class="btn btn-matrix"
+          (click)="comprar(produtoSelecionado)">
+
+          Adicionar ao carrinho
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- FUNDO DO MODAL -->
+
+<div
+  class="modal-backdrop show"
+  *ngIf="produtoSelecionado">
+</div>
+
+
+<!-- AVISO PARA VISITANTES -->
+
+<div
+  class="modal d-block"
+  tabindex="-1"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="titulo-aviso-login"
+  *ngIf="mostrarAvisoLogin">
+
+  <div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content modal-login-matrix">
+
+      <!-- CABEÇALHO -->
+
+      <div class="modal-header border-0">
+
+        <h5
+          id="titulo-aviso-login"
+          class="modal-title titulo-aviso-login">
+
+          IDENTIFIQUE-SE
+
+        </h5>
+
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          aria-label="Fechar"
+          (click)="fecharAvisoLogin()">
+        </button>
+
+      </div>
+
+      <!-- CONTEÚDO -->
+
+      <div class="modal-body text-center">
+
+        <div class="icone-login-matrix">
+          <i class="bi bi-lock"></i>
+        </div>
+
+        <h4 class="titulo-convite-matrix mb-3">
+          Faça parte da MATRIX!
+        </h4>
+
+        <p class="texto-aviso-login">
+          Para adicionar produtos ao carrinho,
+          você precisa entrar na sua conta
+          ou criar um cadastro.
+        </p>
+
+        <div class="d-grid gap-3 mt-4">
+
+          <button
+            type="button"
+            class="btn btn-matrix"
+            (click)="irParaLogin()">
+
+            Fazer login
+
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            (click)="irParaCadastro()">
+
+            Cadastrar-se
+
+          </button>
+
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-link link-continuar-matrix mt-3"
+          (click)="fecharAvisoLogin()">
+
+          Continuar comprando
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FUNDO DO AVISO DE LOGIN -->
+
+<div
+  class="modal-backdrop show"
+  *ngIf="mostrarAvisoLogin">
+</div>

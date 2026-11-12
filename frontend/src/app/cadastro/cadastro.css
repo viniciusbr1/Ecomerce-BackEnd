@@ -1,0 +1,96 @@
+.titulo-matrix {
+  color: #00ff41;
+  font-family: monospace;
+  font-weight: bold;
+  letter-spacing: 4px;
+  text-shadow: 0 0 10px #00ff41;
+}
+
+
+.subtitulo-matrix {
+  color: #bfbfbf;
+}
+
+
+/* CARD */
+
+.card-matrix {
+  background-color: #111111;
+  color: white;
+
+  border: 1px solid #2d2d2d;
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 0 25px rgba(0, 255, 65, 0.12);
+}
+
+
+/* LABELS */
+
+.form-label {
+  color: #dddddd;
+
+  font-weight: 500;
+}
+
+
+/* CAMPOS */
+
+.form-control {
+  min-height: 45px;
+}
+
+
+/* CAMPO INVÁLIDO */
+
+.form-control.ng-invalid.ng-touched {
+  border-color: #dc3545;
+}
+
+
+/* CAMPO VÁLIDO */
+
+.form-control.ng-valid.ng-touched {
+  border-color: #00ff41;
+}
+
+
+/* BOTÃO DESABILITADO */
+
+.btn-matrix:disabled {
+  background-color: #444444;
+
+  border-color: #444444;
+
+  color: #999999;
+
+  box-shadow: none;
+}
+
+
+/* MENSAGEM DE SUCESSO */
+
+.alert-success {
+  background-color: rgba(0, 255, 65, 0.12);
+
+  color: #00ff41;
+
+  border: 1px solid #00ff41;
+}
+
+
+/* CELULAR */
+
+@media (max-width: 576px) {
+
+  .titulo-matrix {
+    font-size: 30px;
+  }
+
+  .card-body {
+    padding: 22px !important;
+  }
+
+}

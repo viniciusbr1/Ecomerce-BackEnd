@@ -1,0 +1,149 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+
+/* SITE INTEIRO */
+
+.site-matrix {
+  position: relative;
+
+  min-height: 100vh;
+
+  background-color: #000000;
+
+  overflow-x: hidden;
+}
+
+
+/* FUNDO MATRIX GLOBAL */
+
+.matrix-global {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+
+/* CONTEÚDO DAS PÁGINAS */
+
+.conteudo-site {
+  position: relative;
+
+  z-index: 2;
+
+  min-height: calc(100vh - 56px);
+
+  background-color: transparent;
+}
+
+
+/* MENU */
+
+.navbar-matrix {
+  position: relative;
+
+  z-index: 3;
+
+  background-color: rgba(0, 0, 0, 0.92);
+
+  border-bottom: 1px solid #00ff41;
+
+  box-shadow:
+    0 0 15px rgba(0, 255, 65, 0.15);
+}
+
+
+/* LOGO */
+
+.logo-matrix {
+  color: #00ff41 !important;
+
+  font-family: monospace;
+
+  font-weight: bold;
+
+  font-size: 26px;
+
+  letter-spacing: 4px;
+
+  text-shadow:
+    0 0 10px #00ff41;
+}
+
+
+/* LINKS DO MENU */
+
+.navbar-matrix .nav-link {
+  color: white;
+
+  font-size: 16px;
+
+  margin-left: 8px;
+
+  transition: 0.3s;
+}
+
+
+.navbar-matrix .nav-link:hover {
+  color: #00ff41;
+
+  text-shadow:
+    0 0 8px #00ff41;
+}
+
+
+/* BOTÃO MENU CELULAR */
+
+.navbar-toggler {
+  border-color: #00ff41;
+}
+
+
+.navbar-toggler:focus {
+  box-shadow:
+    0 0 0 0.2rem
+    rgba(0, 255, 65, 0.20);
+}
+
+
+/* DEIXA AS PÁGINAS TRANSPARENTES */
+
+app-vitrine,
+app-cesta,
+app-cadastro,
+app-login,
+app-pedido,
+app-detalhe {
+  position: relative;
+
+  z-index: 2;
+
+  display: block;
+
+  background-color: transparent;
+}
+
+
+/* RESPONSIVO */
+
+@media (max-width: 991px) {
+
+  .navbar-matrix .nav-link {
+    margin-left: 0;
+
+    padding-top: 10px;
+
+    padding-bottom: 10px;
+  }
+
+}

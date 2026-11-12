@@ -1,0 +1,113 @@
+
+<section class="meus-pedidos-container">
+
+  <div class="pedidos-header">
+    <div>
+      <span class="pedidos-subtitulo">MINHA CONTA</span>
+      <h1>MEUS <span>PEDIDOS</span></h1>
+      <p>Acompanhe seu histórico de compras na MATRIX.</p>
+    </div>
+
+    <a routerLink="/produtos" class="btn-continuar">
+      Continuar comprando
+    </a>
+  </div>
+
+  <!-- Carregando -->
+  <div *ngIf="carregando" class="estado-pedidos">
+    <div class="spinner"></div>
+    <p>Carregando seus pedidos...</p>
+  </div>
+
+  <!-- Erro -->
+  <div *ngIf="!carregando && mensagemErro" class="estado-pedidos">
+    <h2>Não foi possível carregar seus pedidos</h2>
+    <p>{{ mensagemErro }}</p>
+
+    <button class="btn-acao" (click)="carregarPedidos()">
+      Tentar novamente
+    </button>
+  </div>
+
+  <!-- Sem pedidos -->
+  <div
+    *ngIf="!carregando && !mensagemErro && pedidos.length === 0"
+    class="estado-pedidos">
+
+    <h2>Você ainda não realizou pedidos</h2>
+    <p>Explore nossos produtos e faça sua primeira compra.</p>
+
+    <a routerLink="/produtos" class="btn-acao">
+      Explorar produtos
+    </a>
+  </div>
+
+  <!-- Histórico -->
+  <div
+    *ngIf="!carregando && !mensagemErro && pedidos.length > 0"
+    class="lista-pedidos">
+
+    <div class="quantidade-pedidos">
+      {{ pedidos.length }}
+      {{ pedidos.length === 1 ? 'pedido encontrado' : 'pedidos encontrados' }}
+    </div>
+
+    <article class="pedido-card" *ngFor="let pedido of pedidos">
+
+      <div class="pedido-topo">
+
+        <div class="pedido-identificacao">
+          <span class="pedido-label">PEDIDO</span>
+          <h2>#{{ pedido.id }}</h2>
+          <span class="pedido-data">
+            {{ pedido.dataPedido | date:'dd/MM/yyyy HH:mm' }}
+          </span>
+        </div>
+
+        <span
+            class="pedido-status"
+            [class.status-finalizado]="pedido.status === 'FINALIZADO'"
+            [class.status-pendente]="pedido.status === 'PENDENTE'">
+            {{ pedido.status }}
+        </span>
+
+      </div>
+
+      <div class="pedido-conteudo">
+
+        <h3>Produtos do pedido</h3>
+
+        <div class="produto-pedido" *ngFor="let item of pedido.itens">
+
+          <div class="produto-informacoes">
+            <strong>{{ item.nome }}</strong>
+            <span>
+              Quantidade: {{ item.quantidade }}
+            </span>
+            <span>
+              Valor unitário:
+              {{ item.precoUnitario | currency:'BRL' }}
+            </span>
+          </div>
+
+          <strong class="produto-subtotal">
+            {{ item.subtotal | currency:'BRL' }}
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="pedido-rodape">
+        <span>VALOR TOTAL</span>
+
+        <strong>
+          {{ pedido.valorTotal | currency:'BRL' }}
+        </strong>
+      </div>
+
+    </article>
+
+  </div>
+
+</section>

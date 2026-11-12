@@ -1,0 +1,393 @@
+
+<div class="container py-5">
+
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-5">
+
+      <div class="card card-matrix shadow">
+        <div class="card-body p-4">
+
+<!-- ÁREA DO CLIENTE LOGADO -->
+
+        <div *ngIf="clienteLogado as cliente; else formularioLogin">
+
+          <div class="text-center mb-4">
+            <h1 class="titulo-matrix">MINHA CONTA</h1>
+
+            <p class="subtitulo-matrix">
+              Bem-vindo à MATRIX!
+            </p>
+          </div>
+
+          <div class="text-center mb-4">
+
+            <h2 class="nome-cliente">
+              {{ cliente.nome }}
+            </h2>
+
+            <p class="email-cliente">
+              {{ cliente.email }}
+            </p>
+
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-outline-danger w-100"
+            (click)="sair()">
+            Sair da conta
+          </button>
+
+        </div>
+
+
+        <!-- ÁREA DE LOGIN PARA VISITANTES -->
+
+        <ng-template #formularioLogin>
+
+
+          <div class="text-center mb-4">
+            <h1 class="titulo-matrix">LOGIN</h1>
+
+            <p class="subtitulo-matrix">
+              Acesse sua conta MATRIX
+            </p>
+          </div>
+
+          <!-- FORMULÁRIO DE LOGIN -->
+
+          <form
+            #formLogin="ngForm"
+            (ngSubmit)="entrar(formLogin)">
+
+            <!-- EMAIL -->
+
+            <div class="mb-3">
+              <label class="form-label">E-mail</label>
+
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                [(ngModel)]="email"
+                required
+                email
+                #emailLogin="ngModel"
+                placeholder="exemplo@email.com">
+
+              <div
+                class="text-danger mt-1"
+                *ngIf="emailLogin.invalid && emailLogin.touched">
+                Digite um e-mail válido.
+              </div>
+            </div>
+
+            <!-- SENHA -->
+
+            <div class="mb-3">
+              <label class="form-label">Senha</label>
+
+              <div class="input-group">
+                <input
+                  [type]="mostrarSenha ? 'text' : 'password'"
+                  class="form-control"
+                  name="senha"
+                  [(ngModel)]="senha"
+                  required
+                  minlength="6"
+                  #senhaLogin="ngModel"
+                  placeholder="Digite sua senha">
+
+                <button
+                  type="button"
+                  class="btn btn-outline-success"
+                  (click)="mostrarSenha = !mostrarSenha">
+                  👁️
+                </button>
+              </div>
+
+              <div
+                class="text-danger mt-1"
+                *ngIf="senhaLogin.invalid && senhaLogin.touched">
+                A senha deve ter pelo menos 6 caracteres.
+              </div>
+            </div>
+
+            <!-- ESQUECI A SENHA -->
+
+            <div class="text-end mb-4">
+              <button
+                type="button"
+                class="btn btn-link link-matrix p-0"
+                (click)="abrirRecuperacao()">
+                Esqueci minha senha
+              </button>
+            </div>
+
+            <!-- BOTÃO LOGIN -->
+
+            <button
+              type="submit"
+              class="btn btn-matrix w-100"
+              [disabled]="formLogin.invalid">
+              Entrar
+            </button>
+
+            <!-- MENSAGEM -->
+
+            <div
+              class="alert alert-success text-center mt-4"
+              *ngIf="mensagem !== ''">
+              {{ mensagem }}
+            </div>
+
+          </form>
+
+          </ng-template>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- MODAL DE RECUPERAÇÃO DE SENHA -->
+
+<div
+  class="modal d-block"
+  tabindex="-1"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Recuperar senha"
+  *ngIf="mostrarRecuperacao">
+
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-matrix">
+
+      <!-- CABEÇALHO -->
+
+      <div class="modal-header">
+        <h5 class="modal-title titulo-modal">
+          Recuperar senha
+        </h5>
+
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          (click)="fecharRecuperacao()">
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- ETAPA 1: INFORMAR EMAIL -->
+
+        <div *ngIf="etapaRecuperacao === 1">
+
+          <p>
+            Digite seu e-mail para solicitar
+            um código de recuperação.
+          </p>
+
+          <input
+            type="email"
+            class="form-control mb-3"
+            [(ngModel)]="emailRecuperacao"
+            placeholder="exemplo@email.com">
+
+          <button
+            type="button"
+            class="btn btn-matrix w-100"
+            [disabled]="carregandoRecuperacao || !emailRecuperacao.trim()"
+            (click)="gerarCodigo()">
+
+            {{ carregandoRecuperacao ? 'Enviando...' : 'Enviar código' }}
+
+          </button>
+
+        </div>
+
+
+        <!-- ETAPA 2: DIGITAR CÓDIGO -->
+
+        <div *ngIf="etapaRecuperacao === 2">
+
+          <p>
+            Informe o código de 6 dígitos
+            solicitado para o e-mail:
+          </p>
+
+          <p class="text-center">
+            <strong>{{ emailRecuperacao }}</strong>
+          </p>
+
+          <label class="form-label">
+            Código de recuperação
+          </label>
+
+          <input
+            type="text"
+            class="form-control mb-3 text-center"
+            [(ngModel)]="codigoDigitado"
+            maxlength="6"
+            inputmode="numeric"
+            placeholder="000000">
+
+          <button
+            type="button"
+            class="btn btn-matrix w-100"
+            [disabled]="codigoDigitado.length !== 6"
+            (click)="avancarParaNovaSenha()">
+            Continuar
+          </button>
+
+          <div class="text-center mt-3">
+            <button
+              type="button"
+              class="btn btn-link link-matrix"
+              (click)="etapaRecuperacao = 1">
+              Alterar e-mail
+            </button>
+          </div>
+
+        </div>
+
+
+        <!-- ETAPA 3: NOVA SENHA -->
+
+        <div *ngIf="etapaRecuperacao === 3">
+
+          <p>
+            Informe sua nova senha para
+            concluir a recuperação.
+          </p>
+
+          <form
+            #formNovaSenha="ngForm"
+            (ngSubmit)="alterarSenha(formNovaSenha)">
+
+            <!-- NOVA SENHA -->
+
+            <div class="mb-3">
+              <label class="form-label">
+                Nova senha
+              </label>
+
+              <div class="input-group">
+                <input
+                  [type]="mostrarNovaSenha ? 'text' : 'password'"
+                  class="form-control"
+                  name="novaSenha"
+                  [(ngModel)]="novaSenha"
+                  required
+                  minlength="8"
+                  placeholder="Mínimo 8 caracteres">
+
+                <button
+                  type="button"
+                  class="btn btn-outline-success"
+                  (click)="mostrarNovaSenha = !mostrarNovaSenha">
+                  👁️
+                </button>
+              </div>
+            </div>
+
+            <!-- CONFIRMAR SENHA -->
+
+            <div class="mb-3">
+              <label class="form-label">
+                Confirmar nova senha
+              </label>
+
+              <div class="input-group">
+                <input
+                  [type]="mostrarConfirmarSenha ? 'text' : 'password'"
+                  class="form-control"
+                  name="confirmarSenha"
+                  [(ngModel)]="confirmarSenha"
+                  required
+                  minlength="8"
+                  placeholder="Digite novamente">
+
+                <button
+                  type="button"
+                  class="btn btn-outline-success"
+                  (click)="mostrarConfirmarSenha = !mostrarConfirmarSenha">
+                  👁️
+                </button>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-matrix w-100"
+              [disabled]="carregandoRecuperacao ||
+                          formNovaSenha.invalid ||
+                          novaSenha !== confirmarSenha">
+
+              {{ carregandoRecuperacao ? 'Alterando...' : 'Alterar senha' }}
+
+            </button>
+
+            <div class="text-center mt-3">
+              <button
+                type="button"
+                class="btn btn-link link-matrix"
+                (click)="etapaRecuperacao = 2">
+                Voltar para o código
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+
+
+        <!-- ETAPA 4: SUCESSO -->
+
+        <div
+          class="text-center"
+          *ngIf="etapaRecuperacao === 4">
+
+          <h4 class="sucesso-matrix">
+            Senha alterada com sucesso!
+          </h4>
+
+          <p class="mt-3">
+            Sua senha foi atualizada.
+            Agora você pode acessar sua conta MATRIX.
+          </p>
+
+          <button
+            type="button"
+            class="btn btn-matrix w-100"
+            (click)="fecharRecuperacao()">
+            Voltar para o login
+          </button>
+
+        </div>
+
+
+        <!-- MENSAGEM DE ERRO -->
+
+        <div
+          class="text-danger text-center mt-3"
+          *ngIf="mensagemRecuperacao !== ''">
+          {{ mensagemRecuperacao }}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- FUNDO DO MODAL -->
+
+<div
+  class="modal-backdrop show"
+  *ngIf="mostrarRecuperacao">
+</div>

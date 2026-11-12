@@ -1,0 +1,121 @@
+<div
+  class="site-matrix"
+  (mousemove)="moverMouseGlobal($event)"
+  (mouseleave)="sairMouseGlobal()">
+
+  <canvas
+    #matrixGlobal
+    class="matrix-global">
+  </canvas>
+
+
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-matrix">
+
+    <div class="container">
+
+      <a
+        class="navbar-brand logo-matrix"
+        routerLink="/">
+
+        MATRIX
+
+      </a>
+
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#menuPrincipal">
+
+        <span class="navbar-toggler-icon"></span>
+
+      </button>
+
+
+      <div
+        class="collapse navbar-collapse"
+        id="menuPrincipal">
+
+        <ul class="navbar-nav ms-auto">
+
+          <li class="nav-item">
+
+            <a
+              class="nav-link"
+              routerLink="/">
+
+              Início
+
+            </a>
+
+          </li>
+
+
+          <li class="nav-item">
+
+            <a
+              class="nav-link"
+              routerLink="/produtos">
+
+              Produtos
+
+            </a>
+
+          </li>
+
+
+          <li class="nav-item">
+
+            <a
+              class="nav-link"
+              routerLink="/cadastro">
+
+              Cadastro
+
+            </a>
+
+          </li>
+
+
+          <li class="nav-item">
+
+            <a
+              class="nav-link"
+              routerLink="/login">
+
+              Login
+
+            </a>
+
+          </li>
+
+
+          <li class="nav-item">
+
+            <a
+              class="nav-link"
+              routerLink="/cesta">
+
+              Carrinho
+
+            </a>
+
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+
+  <main class="conteudo-site">
+
+    <router-outlet></router-outlet>
+
+  </main>
+
+</div>

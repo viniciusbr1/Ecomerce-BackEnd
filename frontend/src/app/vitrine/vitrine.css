@@ -1,0 +1,516 @@
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+.titulo-matrix {
+  color: #00ff41;
+  font-family: monospace;
+  font-weight: bold;
+  letter-spacing: 4px;
+  text-shadow: 0 0 10px #00ff41;
+}
+
+
+.subtitulo-matrix {
+  color: #bfbfbf;
+  font-size: 17px;
+}
+
+
+/* PESQUISA */
+
+.pesquisa-matrix {
+  background-color: #111111;
+
+  color: white;
+
+  border: 1px solid #00ff41;
+
+  border-radius: 10px;
+
+  min-height: 48px;
+}
+
+
+.pesquisa-matrix:focus {
+  background-color: #111111;
+
+  color: white;
+
+  border-color: #00ff41;
+
+  box-shadow:
+    0 0 12px rgba(0, 255, 65, 0.25);
+}
+
+
+.pesquisa-matrix::placeholder {
+  color: #888888;
+}
+
+
+/* SELECT */
+
+.form-select {
+  background-color: #111111;
+
+  color: white;
+
+  border: 1px solid #00ff41;
+
+  min-height: 45px;
+}
+
+
+.form-select:focus {
+  background-color: #111111;
+
+  color: white;
+
+  border-color: #00ff41;
+
+  box-shadow:
+    0 0 12px rgba(0, 255, 65, 0.25);
+}
+
+
+/* LABEL */
+
+.form-label {
+  color: #dddddd;
+}
+
+
+/* CARD DO PRODUTO */
+
+.card-matrix {
+  background-color: #111111;
+
+  color: white;
+
+  border: 1px solid #2d2d2d;
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  transition: 0.3s;
+}
+
+
+.card-matrix:hover {
+  transform: translateY(-6px);
+
+  border-color: #00ff41;
+
+  box-shadow:
+    0 0 22px rgba(0, 255, 65, 0.25) !important;
+}
+
+
+/* IMAGEM */
+
+.card-matrix img {
+  height: 220px;
+
+  object-fit: cover;
+
+  background-color: #1a1a1a;
+}
+
+
+/* CATEGORIA CARD */
+
+.categoria-card {
+  color: #00ff41;
+
+  font-family: monospace;
+
+  font-size: 13px;
+
+  font-weight: bold;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+
+  margin-bottom: 8px;
+}
+
+
+/* TÍTULO DO PRODUTO */
+
+.card-matrix .card-title {
+  font-family: monospace;
+
+  font-size: 20px;
+
+  color: #00ff41;
+}
+
+
+/* DESCRIÇÃO */
+
+.card-matrix .card-text {
+  color: #cccccc;
+
+  min-height: 72px;
+}
+
+
+/* PREÇO */
+
+.preco-matrix {
+  color: #00ff41;
+
+  font-family: monospace;
+
+  font-weight: bold;
+
+  margin-top: 18px;
+}
+
+
+/* RODAPÉ */
+
+.card-matrix .card-footer {
+  background-color: transparent;
+
+  padding: 16px;
+}
+
+
+/* BOTÃO DETALHES */
+
+.btn-outline-success {
+  color: #00ff41;
+
+  border-color: #00ff41;
+}
+
+
+.btn-outline-success:hover {
+  background-color: #00ff41;
+
+  border-color: #00ff41;
+
+  color: black;
+}
+
+
+/* MENSAGEM FLUTUANTE */
+
+.mensagem-flutuante {
+  position: fixed;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  z-index: 9999;
+
+  background-color: #111111;
+
+  color: #00ff41;
+
+  border: 2px solid #00ff41;
+
+  border-radius: 14px;
+
+  padding: 22px 32px;
+
+  min-width: 300px;
+
+  max-width: 90%;
+
+  font-family: monospace;
+
+  font-size: 18px;
+
+  font-weight: bold;
+
+  text-align: center;
+
+  box-shadow:
+    0 0 30px rgba(0, 255, 65, 0.6);
+
+  animation:
+    aparecerMensagem 0.25s ease;
+}
+
+
+@keyframes aparecerMensagem {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0.75);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+}
+
+
+/* MODAL */
+
+.modal {
+  z-index: 1055;
+}
+
+
+.modal-matrix {
+  background-color: #111111;
+
+  color: white;
+
+  border: 1px solid #00ff41;
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 0 35px rgba(0, 255, 65, 0.35);
+}
+
+
+.modal-header {
+  border-bottom: 1px solid #333333;
+}
+
+
+.modal-title {
+  color: #00ff41;
+
+  font-family: monospace;
+
+  font-weight: bold;
+}
+
+
+.modal-footer {
+  border-top: 1px solid #333333;
+}
+
+
+/* IMAGEM DO MODAL */
+
+.imagem-detalhe {
+  width: 100%;
+
+  max-height: 300px;
+
+  object-fit: contain;
+
+  background-color: #080808;
+
+  border-radius: 10px;
+}
+
+
+/* CATEGORIA DO MODAL */
+
+.categoria-produto {
+  color: #00ff41;
+
+  font-family: monospace;
+
+  font-weight: bold;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+}
+
+
+/* ESPECIFICAÇÕES */
+
+.titulo-detalhes {
+  color: #00ff41;
+
+  font-family: monospace;
+
+  font-weight: bold;
+
+  margin-bottom: 15px;
+}
+
+
+.lista-detalhes {
+  padding-left: 20px;
+
+  margin-bottom: 0;
+}
+
+
+.lista-detalhes li {
+  color: #dddddd;
+
+  margin-bottom: 8px;
+}
+
+
+.lista-detalhes li::marker {
+  color: #00ff41;
+}
+
+
+/* TEXTO VERDE */
+
+.texto-verde {
+  color: #00ff41;
+
+  margin-left: 5px;
+}
+
+
+/* LINHA */
+
+.modal-matrix hr {
+  border-color: #00ff41;
+
+  opacity: 0.35;
+}
+
+
+/* FUNDO DO MODAL */
+
+.modal-backdrop {
+  opacity: 0.8;
+}
+
+
+/* TABLET */
+
+@media (max-width: 768px) {
+
+  .card-matrix img {
+    height: 210px;
+  }
+
+}
+
+
+/* CELULAR */
+
+@media (max-width: 576px) {
+
+  .titulo-matrix {
+    font-size: 30px;
+  }
+
+  .subtitulo-matrix {
+    font-size: 15px;
+  }
+
+  .card-matrix img {
+    height: 200px;
+  }
+
+  .modal-dialog {
+    margin: 15px;
+  }
+
+  .imagem-detalhe {
+    max-height: 220px;
+  }
+
+  .mensagem-flutuante {
+    width: 85%;
+
+    min-width: auto;
+
+    padding: 18px;
+
+    font-size: 16px;
+  }
+
+
+
+}
+
+
+/* =========================
+   MODAL DE LOGIN - MATRIX
+========================= */
+
+.modal-login-matrix {
+  background-color: #111111;
+  color: #ffffff;
+
+  border: 1px solid #00ff41;
+  border-radius: 16px;
+
+  padding: 12px;
+
+  box-shadow:
+    0 0 30px rgba(0, 255, 65, 0.25);
+}
+
+.titulo-aviso-login {
+  color: #00ff41;
+  font-family: monospace;
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+}
+
+
+/* CADEADO VERDE */
+.icone-login-matrix {
+  font-size: 42px;
+  margin-bottom: 18px;
+  color: #00ff41;
+}
+
+/* TEXTO FAÇA PARTE DA MATRIX */
+.titulo-convite-matrix {
+  color: #00ff41;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.35);
+}
+
+.icone-login-matrix {
+  font-size: 48px;
+  color: #00ff41;
+  margin-bottom: 18px;
+}
+
+.texto-aviso-login {
+  color: #bfbfbf;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.modal-login-matrix .btn-matrix {
+  padding: 12px;
+  font-weight: 700;
+}
+
+.modal-login-matrix .btn-outline-success {
+  border-color: #00ff41;
+  color: #00ff41;
+  padding: 12px;
+  font-weight: 600;
+}
+
+.modal-login-matrix .btn-outline-success:hover {
+  background-color: #00ff41;
+  color: #000000;
+}
+
+.link-continuar-matrix {
+  color: #999999;
+  text-decoration: none;
+}
+
+.link-continuar-matrix:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}

@@ -1,0 +1,275 @@
+<span style="display: none">
+  {{ versaoCarrinho() }}
+</span>
+
+
+<div class="container py-5">
+
+  <div class="cabecalho-carrinho mb-4">
+
+    <div class="cabecalho-espaco"></div>
+
+    <div class="text-center">
+      <h1 class="titulo-matrix">
+        CARRINHO
+      </h1>
+
+      <p class="subtitulo-matrix mb-0">
+        Confira os produtos escolhidos
+      </p>
+    </div>
+
+    <div class="cabecalho-acoes">
+      <button
+        type="button"
+        class="btn-meus-pedidos"
+        (click)="irParaMeusPedidos()">
+
+        <i class="bi bi-box-seam"></i>
+        Meus Pedidos
+
+      </button>
+    </div>
+
+  </div>
+
+
+
+  <div
+    class="alert alert-dark text-center"
+    *ngIf="itens.length === 0">
+
+    Seu carrinho está vazio.
+
+  </div>
+
+
+  <div *ngIf="itens.length > 0">
+
+    <div
+      class="card card-matrix mb-3"
+      *ngFor="let item of itens">
+
+      <div class="card-body">
+
+        <div class="row align-items-center">
+
+          <div class="col-12 col-md-4">
+
+            <h5 class="produto-nome">
+              {{ item.produto.nome }}
+            </h5>
+
+            <p class="mb-0">
+              {{ item.produto.preco | currency:'BRL' }}
+            </p>
+
+          </div>
+
+
+          <div
+            class="col-12 col-md-4
+            d-flex justify-content-md-center
+            align-items-center gap-2 my-3 my-md-0">
+
+            <button
+              class="btn btn-outline-light btn-sm"
+              (click)="diminuir(item)">
+
+              -
+
+            </button>
+
+            <span class="quantidade">
+              {{ item.quantidade }}
+            </span>
+
+            <button
+              class="btn btn-outline-success btn-sm"
+              (click)="aumentar(item)">
+
+              +
+
+            </button>
+
+          </div>
+
+
+          <div class="col-12 col-md-4 text-md-end">
+
+            <p class="subtotal mb-2">
+              {{ item.produto.preco * item.quantidade | currency:'BRL' }}
+            </p>
+
+            <button
+              class="btn btn-outline-danger btn-sm"
+              (click)="remover(item)">
+
+              Remover
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="row g-4 mt-3">
+
+      <div class="col-12 col-lg-6">
+
+        <div class="card card-matrix h-100">
+
+          <div class="card-body">
+
+            <h4 class="titulo-bloco">
+              Cupom de desconto
+            </h4>
+
+            <div class="input-group mb-2">
+
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="cupom"
+                placeholder="Digite seu cupom">
+
+              <button
+                class="btn btn-matrix"
+                (click)="aplicarCupom()">
+
+                Aplicar
+
+              </button>
+
+            </div>
+
+            <p class="mb-0">
+              {{ mensagemCupom }}
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-12 col-lg-6">
+
+        <div class="card card-matrix h-100">
+
+          <div class="card-body">
+
+            <h4 class="titulo-bloco">
+              Calcular frete
+            </h4>
+
+            <div class="input-group mb-2">
+
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="cep"
+                (input)="formatarCep()"
+                maxlength="9"
+                placeholder="00000-000">
+
+              <button
+                class="btn btn-matrix"
+                (click)="calcularFrete()">
+
+                Calcular
+
+              </button>
+
+            </div>
+
+            <p class="mb-0">
+              {{ mensagemFrete }}
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card card-matrix mt-4">
+
+      <div class="card-body">
+
+        <h4 class="titulo-bloco mb-4">
+          Resumo da compra
+        </h4>
+
+
+        <div class="d-flex justify-content-between mb-2">
+
+          <span>Produtos:</span>
+
+          <span>
+            {{ calcularTotal() | currency:'BRL' }}
+          </span>
+
+        </div>
+
+
+        <div class="d-flex justify-content-between mb-2">
+
+          <span>Desconto:</span>
+
+          <span>
+            - {{ desconto | currency:'BRL' }}
+          </span>
+
+        </div>
+
+
+        <div class="d-flex justify-content-between mb-3">
+
+          <span>Frete:</span>
+
+          <span>
+            {{ frete | currency:'BRL' }}
+          </span>
+
+        </div>
+
+
+        <hr>
+
+
+        <div class="d-flex justify-content-between total-final">
+
+          <span>Total:</span>
+
+          <span>
+            {{ calcularTotalFinal() | currency:'BRL' }}
+          </span>
+
+        </div>
+
+
+        <button
+          class="btn btn-matrix w-100 mt-4"
+          (click)="finalizarCompra()">
+
+          Finalizar compra
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
